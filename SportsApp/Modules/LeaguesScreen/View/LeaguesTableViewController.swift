@@ -9,9 +9,25 @@ import UIKit
 
 class LeaguesTableViewController: UITableViewController {
 
+    var sportName : String?
+    var result : [Result] = Array<Result>()
+    var viewModel : HomeViewModel!
+    var favCoreData = FavCodeData.sharedDB
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        viewModel = HomeViewModel()
+        viewModel.sportName = sportName
+        viewModel.bindResultToViewController={
+            [weak self] in
+            DispatchQueue.main.async {
+                self?.result = self?.viewModel.result ?? [Result]()
+                self?.tableView.reloadData()
+            }
+        }
+        viewModel.getItems()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,23 +39,26 @@ class LeaguesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return result.count
     }
-
-    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        favCoreData.insert(newLeagues: result[indexPath.row])
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = result[indexPath.row].leagueName
+        
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

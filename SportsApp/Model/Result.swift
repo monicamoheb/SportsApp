@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Result
-class Result: Codable {
+class Result: Decodable {
     var leagueKey: Int?
     var leagueName: String?
     var countryKey: Int?
@@ -34,14 +34,5 @@ class Result: Codable {
     }
     init() {
         
-    }
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.leagueKey = try container.decodeIfPresent(Int.self, forKey: .leagueKey)
-        self.leagueName = try container.decodeIfPresent(String.self, forKey: .leagueName)
-        self.countryKey = try container.decodeIfPresent(Int.self, forKey: .countryKey)
-        self.countryName = try container.decodeIfPresent(String.self, forKey: .countryName)
-        self.leagueLogo = try container.decodeIfPresent(String.self, forKey: .leagueLogo)
-        self.countryLogo = try container.decodeIfPresent(String.self, forKey: .countryLogo)
     }
 }

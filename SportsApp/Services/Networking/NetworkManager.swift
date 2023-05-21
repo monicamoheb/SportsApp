@@ -7,37 +7,22 @@
 //
 
 import Foundation
+import Alamofire
+
 protocol NetworkService{
-    static func loadData<T: Decodable>(compilitionHandler: @escaping (T?) -> Void)
+    static func loadData<T: Decodable>(sportName: String, param:Parameters ,compilitionHandler: @escaping (T?) -> Void)
 }
 class NetworkManager : NetworkService{
     
-    static func loadData<T: Decodable>(compilitionHandler: @escaping (T?) -> Void){
-        //1-
-        let url = URL(string: "https://imdb-api.com/en/API/BoxOffice/k_uw09j68u")
-        guard let urlFinal = url else {
-            return
-        }
-        //2-
-        let request = URLRequest(url: urlFinal)
-        //3-
-        let session = URLSession(configuration: .default)
-        //4-
-        let task = session.dataTask(with: request) { (data, response, error) in
-            //6-
-            guard let data = data else{
+    static func loadData<T: Decodable>(sportName: String, param:Parameters ,compilitionHandler: @escaping (T?) -> Void){
+        //let param = ["met":"Leagues","APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
+        AF.request("https://apiv2.allsportsapi.com/\(sportName)/",parameters: param).responseDecodable(of: T.self){ response in
+            debugPrint(response)
+            guard response.data != nil else{
                 return
             }
             do{
-                /*
-            let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String,Any>
-            //print(result)
-            let items = result["items"] as! [Dictionary<String,String>]
-            let firstItem = items[0]
-            let title = firstItem["title"]
-            print(title ?? "No title")*/
-                let result = try JSONDecoder().decode(T.self, from: data)
-                //print(result.items[0].header ?? "No title")
+                let result = try JSONDecoder().decode(T.self, from: response.data ?? Data())
                 compilitionHandler(result)
                 
             }catch let error{
@@ -45,8 +30,6 @@ class NetworkManager : NetworkService{
                 compilitionHandler(nil)
             }
         }
-        //5-
-        task.resume()
         
     }
 }
