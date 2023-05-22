@@ -7,11 +7,15 @@
 
 import UIKit
 
-class FavTableViewController: UITableViewController {
+class FavTableViewController: UITableViewController{
     var favCoreData = FavCodeData.sharedDB
     var favList : [Result] = Array<Result>()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let  nib = UINib(nibName: "LeaguesCustomView", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,8 +40,30 @@ class FavTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text=favList[indexPath.row].leagueName
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesCustomView
+        
+        cell.leagueName.text = favList[indexPath.row].leagueName
+        
+        let url = URL(string: favList[indexPath.row].leagueLogo ?? "")
+        
+        cell.leagueImage.kf.setImage(
+              with: url,
+              placeholder: UIImage(named: "err.png"),
+              options: [
+                  .scaleFactor(UIScreen.main.scale),
+                  .transition(.fade(1)),
+                  .cacheOriginalImage
+              ])
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        
+        cell.leagueImage?.layer.cornerRadius=(cell.leagueImage?.frame.size.width ?? 100)/2
+        cell.leagueImage?.clipsToBounds=true
+        
+        cell.contentView.layer.borderWidth = 2
+            cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.layer.cornerRadius = (cell.leagueImage?.frame.size.width ?? 100)/2
+        
         // Configure the cell...
 
         return cell
@@ -47,6 +73,8 @@ class FavTableViewController: UITableViewController {
         favList.remove(at: indexPath.row)
         tableView.reloadData()
     }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

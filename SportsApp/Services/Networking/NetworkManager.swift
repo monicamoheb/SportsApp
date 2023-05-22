@@ -15,7 +15,6 @@ protocol NetworkService{
 class NetworkManager : NetworkService{
     
     static func loadData<T: Decodable>(sportName: String, param:Parameters ,compilitionHandler: @escaping (T?) -> Void){
-        //let param = ["met":"Leagues","APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
         AF.request("https://apiv2.allsportsapi.com/\(sportName)/",parameters: param).responseDecodable(of: T.self){ response in
             debugPrint(response)
             guard response.data != nil else{

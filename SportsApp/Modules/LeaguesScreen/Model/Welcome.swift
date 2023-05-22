@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK: - Welcome
-class Welcome: Decodable {
+class Welcome<T>: Decodable where T: Decodable{
     var success: Int?
-    var result: [Result]?
+    var result: [T]?
 
-    init(success: Int, result: [Result]) {
+    init(success: Int, result: [T]) {
         self.success = success
         self.result = result
     }

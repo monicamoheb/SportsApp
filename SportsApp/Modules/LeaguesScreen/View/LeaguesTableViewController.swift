@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LeaguesTableViewController: UITableViewController {
 
@@ -16,6 +17,9 @@ class LeaguesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let  nib = UINib(nibName: "LeaguesCustomView", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
         
         viewModel = HomeViewModel()
         viewModel.sportName = sportName
@@ -47,12 +51,35 @@ class LeaguesTableViewController: UITableViewController {
         return result.count
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        favCoreData.insert(newLeagues: result[indexPath.row])
+        let vc = storyboard?.instantiateViewController(withIdentifier: "details") as! DetailsViewController
+        vc.currentLeague = result[indexPath.row]
+        self.present(vc, animated: true, completion: nil)
+        //favCoreData.insert(newLeagues: result[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = result[indexPath.row].leagueName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesCustomView
+        
+        cell.leagueName.text = result[indexPath.row].leagueName
+        
+        let url = URL(string: result[indexPath.row].leagueLogo ?? "")
+        
+        cell.leagueImage.kf.setImage(
+              with: url,
+              placeholder: UIImage(named: "err.png"),
+              options: [
+                  .scaleFactor(UIScreen.main.scale),
+                  .transition(.fade(1)),
+                  .cacheOriginalImage
+              ])
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        
+        cell.leagueImage?.layer.cornerRadius=(cell.leagueImage?.frame.size.width ?? 100)/2
+        cell.leagueImage?.clipsToBounds=true
+        
+        cell.contentView.layer.borderWidth = 2
+            cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.layer.cornerRadius = (cell.leagueImage?.frame.size.width ?? 100)/2
         
         // Configure the cell...
 
