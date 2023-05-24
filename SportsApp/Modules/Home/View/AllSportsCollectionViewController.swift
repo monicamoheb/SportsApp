@@ -20,9 +20,9 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        sportsList = [Sports(name: "football",img: "https://cdn.britannica.com/51/190751-050-147B93F7/soccer-ball-goal.jpg"),
-                      Sports(name: "basketball",img: ""),
-                      Sports(name: "cricket",img: "https://st2.depositphotos.com/1454700/6392/i/950/depositphotos_63929367-stock-photo-cricket-stadium-and-ball.jpg")]
+        sportsList = [Sports(name: "Football",img: "https://cdn.britannica.com/51/190751-050-147B93F7/soccer-ball-goal.jpg"),
+                      Sports(name: "Basketball",img: ""),
+                      Sports(name: "Cricket",img: "https://st2.depositphotos.com/1454700/6392/i/950/depositphotos_63929367-stock-photo-cricket-stadium-and-ball.jpg")]
         //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
@@ -56,8 +56,13 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
         cell.sportLabel.text = sportsList[indexPath.row].name
     
         KF.url(URL(string: sportsList[indexPath.row].img!))
-            .placeholder(UIImage(named: "err.png"))
+            .placeholder(UIImage(named: "basketball"))
             .set(to: cell.sportImageView!)
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        cell.contentView.layer.borderWidth = 2
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.layer.cornerRadius = 25
+        
         // Configure the cell
         return cell
     }
@@ -68,7 +73,7 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leagues = storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
-        leagues.sportName = sportsList[indexPath.row].name
+        leagues.sportName = sportsList[indexPath.row].name?.lowercased()
         self.navigationController?.pushViewController(leagues, animated: true)
     }
     

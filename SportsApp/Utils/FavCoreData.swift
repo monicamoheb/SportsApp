@@ -69,7 +69,7 @@ class FavCodeData {
     
     func deleteMovie(newLeague:Result){
         let fetch = NSFetchRequest<NSManagedObject>(entityName: "Leagues")
-        var leagues = self.fetchAll()
+        //var leagues = self.fetchAll()
         
         let predicate = NSPredicate(format: "leagueKey == \(newLeague.leagueKey ?? 0)")
         fetch.predicate = predicate

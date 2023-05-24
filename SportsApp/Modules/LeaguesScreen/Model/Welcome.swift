@@ -11,12 +11,5 @@ import Foundation
 class Welcome<T>: Decodable where T: Decodable{
     var success: Int?
     var result: [T]?
-
-    init(success: Int, result: [T]) {
-        self.success = success
-        self.result = result
-    }
-    init(){
-        
-    }
+    
 }

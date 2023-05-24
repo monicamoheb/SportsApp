@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Reachability
 
 class FavTableViewController: UITableViewController{
     var favCoreData = FavCodeData.sharedDB
     var favList : [Result] = Array<Result>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +51,7 @@ class FavTableViewController: UITableViewController{
         
         cell.leagueImage.kf.setImage(
               with: url,
-              placeholder: UIImage(named: "err.png"),
+              placeholder: UIImage(named: "league"),
               options: [
                   .scaleFactor(UIScreen.main.scale),
                   .transition(.fade(1)),
@@ -69,9 +71,20 @@ class FavTableViewController: UITableViewController{
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        favCoreData.deleteMovie(newLeague: favList[indexPath.row])
-        favList.remove(at: indexPath.row)
-        tableView.reloadData()
+        let reachability = try! Reachability()
+        if reachability.connection != .unavailable{
+                let vc = storyboard?.instantiateViewController(withIdentifier: "details") as! DetailsViewController
+                vc.currentLeague = favList[indexPath.row]
+                //vc.sportName = sportName
+                self.present(vc, animated: true, completion: nil)
+        }
+        else{
+            let alert : UIAlertController = UIAlertController(title: "ALERT!", message: "No Connection", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+       
     }
     
     
