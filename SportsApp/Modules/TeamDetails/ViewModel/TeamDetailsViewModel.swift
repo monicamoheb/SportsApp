@@ -17,8 +17,10 @@ class TeamDetailsViewModel{
     }
     //https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=[team_key]&APIkey=[YourKey]
     func getItems(){
-        let param = ["met":"Teams","teamId":teamID!,"APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
-        NetworkManager.loadData(sportName: sportName ?? "football" ,param: param) { [weak self] (result : Welcome<Teams>?) in
+//        let param = ["met":"Teams","teamId":teamID!,"APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
+        let url = "https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=\(teamID!)&APIkey=fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"
+        
+        NetworkManager().loadData(url : url) { [weak self] (result : Welcome<Teams>?) in
             self?.result = result?.result?[0]
         }
     }

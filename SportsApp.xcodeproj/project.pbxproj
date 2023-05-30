@@ -33,6 +33,9 @@
 		04C734732A1ABBD000F0F910 /* LeaguesCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C734712A1ABBCF00F0F910 /* LeaguesCustomView.swift */; };
 		04C734742A1ABBD000F0F910 /* LeaguesCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C734722A1ABBCF00F0F910 /* LeaguesCustomView.xib */; };
 		04E956142A21340A00AF3344 /* LeagueLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E956132A21340A00AF3344 /* LeagueLocal.swift */; };
+		04E9C0812A268710009983CA /* ApiResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 04E9C07E2A26870F009983CA /* ApiResponse.json */; };
+		04E9C0822A268710009983CA /* ApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9C07F2A268710009983CA /* ApiServiceTests.swift */; };
+		04E9C0832A268710009983CA /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9C0802A268710009983CA /* Bundle.swift */; };
 		04EE33CE2A1D566E00D23E37 /* TeamCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EE33CC2A1D566E00D23E37 /* TeamCustomView.swift */; };
 		04EE33CF2A1D566E00D23E37 /* TeamCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EE33CD2A1D566E00D23E37 /* TeamCustomView.xib */; };
 		04FEEAE72A19459A00E82E1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEEAE62A19459A00E82E1E /* AppDelegate.swift */; };
@@ -95,6 +98,9 @@
 		04C734712A1ABBCF00F0F910 /* LeaguesCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesCustomView.swift; sourceTree = "<group>"; };
 		04C734722A1ABBCF00F0F910 /* LeaguesCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaguesCustomView.xib; sourceTree = "<group>"; };
 		04E956132A21340A00AF3344 /* LeagueLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueLocal.swift; sourceTree = "<group>"; };
+		04E9C07E2A26870F009983CA /* ApiResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApiResponse.json; sourceTree = "<group>"; };
+		04E9C07F2A268710009983CA /* ApiServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceTests.swift; sourceTree = "<group>"; };
+		04E9C0802A268710009983CA /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		04EE33CC2A1D566E00D23E37 /* TeamCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCustomView.swift; sourceTree = "<group>"; };
 		04EE33CD2A1D566E00D23E37 /* TeamCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamCustomView.xib; sourceTree = "<group>"; };
 		04FEEAE32A19459A00E82E1E /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,6 +399,9 @@
 		04FEEAFF2A19459C00E82E1E /* SportsAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				04E9C07E2A26870F009983CA /* ApiResponse.json */,
+				04E9C07F2A268710009983CA /* ApiServiceTests.swift */,
+				04E9C0802A268710009983CA /* Bundle.swift */,
 				04FEEB002A19459C00E82E1E /* SportsAppTests.swift */,
 			);
 			path = SportsAppTests;
@@ -552,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E9C0812A268710009983CA /* ApiResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +718,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E9C0822A268710009983CA /* ApiServiceTests.swift in Sources */,
+				04E9C0832A268710009983CA /* Bundle.swift in Sources */,
 				04FEEB012A19459C00E82E1E /* SportsAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

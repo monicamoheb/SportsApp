@@ -57,12 +57,12 @@ class FavCodeData : LocalSource{
         var leaguesList = Array<LeagueLocal>()
         for item in leagues{
             
-            var key = item.value(forKey: "leagueKey") as? Int
-            var name = item.value(forKey: "leagueName") as? String
-            var logo = item.value(forKey: "leagueLogo") as? String
-            var sport = item.value(forKey: "sportName") as? String
+            let key = item.value(forKey: "leagueKey") as? Int
+            let name = item.value(forKey: "leagueName") as? String
+            let logo = item.value(forKey: "leagueLogo") as? String
+            let sport = item.value(forKey: "sportName") as? String
             
-            var league = LeagueLocal(sport: sport!, name: name!, logo: logo!, key: key!)
+            let league = LeagueLocal(sport: sport!, name: name!, logo: logo!, key: key!)
             
             leaguesList.append(league)
         }

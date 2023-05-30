@@ -13,8 +13,8 @@ protocol ReloadTableViewDelegate: AnyObject {
 }
 
 class FavViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource, ReloadTableViewDelegate{
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noFavImg: UIImageView!
     var favCoreData = FavCodeData.sharedDB
     var favList : [LeagueLocal] = Array<LeagueLocal>()
