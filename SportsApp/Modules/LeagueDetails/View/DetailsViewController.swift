@@ -17,11 +17,14 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
     var latestResultList : [Event] = []
     var teamsList : [Team] = []
     
+    var favTableViewController : ReloadTableViewDelegate?
+    
     var sportName : String?
     var viewModel : DetailsViewModel!
-    
     var favCoreData = FavCodeData.sharedDB
+    var isFav : Bool = false
     var currentLeague : Result!
+    var currentLeagueLocal : LeagueLocal!
     var sectionsNames = ["UpComing Events","Latest Results","Teams"]
     var img = UIImage(systemName: "heart")
     
@@ -37,21 +40,6 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
         nib = UINib(nibName: "TeamCustomView", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "team")
         
-        viewModel=DetailsViewModel()
-        viewModel.sportName=sportName
-        viewModel.leagueID = String(currentLeague.leagueKey ?? 0)
-        
-        viewModel.bindResultToViewController={
-            [weak self] in
-            DispatchQueue.main.async {
-                self?.upComingEventList = self?.viewModel.result ?? []
-                print("Count")
-                print(self?.currentLeague.leagueKey ?? "")
-                self?.latestResultList = self?.viewModel.latesEvent ?? []
-                self?.collectionView.reloadData()
-            }
-        }
-        viewModel.getItems()
         
         self.collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SectionHeader ")
         
@@ -68,21 +56,33 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
         self.collectionView.setCollectionViewLayout(layout, animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
-        favBtn.image = img
-        if  img == UIImage(systemName: "heart") {
-            let favArray =  favCoreData.fetchAll()
-            var isFav : Bool = false
-            for item in favArray{
-                if item.leagueName == currentLeague.leagueName && item.leagueKey==currentLeague.leagueKey{
-                    isFav = true
-                }
-            }
-            if isFav == false {
-                favBtn.image =  UIImage(systemName: "heart")
-            }else{
+        
+        viewModel=DetailsViewModel(favCoreData: favCoreData)
+        viewModel.sportName=sportName
+        
+        if isFav == false {
+            if viewModel.ifLeagueIsFav(leagueID: currentLeague.leagueKey ?? 0){
                 favBtn.image =  UIImage(systemName: "heart.fill")
+                viewModel.leagueID = String(currentLeague.leagueKey ?? 0)
+            }
+            else{
+                favBtn.image =  UIImage(systemName: "heart")
+                viewModel.leagueID = String(currentLeague.leagueKey ?? 0)
+            }
+        }else{
+            favBtn.image =  UIImage(systemName: "heart.fill")
+            viewModel.leagueID = String(currentLeagueLocal.key)
+        }
+        
+        viewModel.bindResultToViewController={
+            [weak self] in
+            DispatchQueue.main.async {
+                self?.upComingEventList = self?.viewModel.result ?? []
+                self?.latestResultList = self?.viewModel.latesEvent ?? []
+                self?.collectionView.reloadData()
             }
         }
+        viewModel.getItems()
         
         
     }
@@ -94,7 +94,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
         if favBtn.image == UIImage(systemName: "heart") {
             print("added to fav from leg details vc")
             let img = UIImage(systemName: "heart.fill")
-            favCoreData.insert(newLeagues: currentLeague)
+            viewModel.insertLeague(league: LeagueLocal(sport: sportName!, name: currentLeague.leagueName!, logo: currentLeague.leagueLogo ?? "", key: currentLeague.leagueKey!))
             favBtn.image = img
         }else{
             
@@ -103,15 +103,20 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             alert.addAction(UIAlertAction(title: "YES", style: .default,handler: { [weak self] action in
                 let img = UIImage(systemName: "heart")
                 self?.favBtn.image = img
-                self?.favCoreData.deleteMovie(newLeague: self?.currentLeague ?? Result())
+                if self?.isFav == false{
+                    self?.viewModel.deleteLeague(leagueID: self?.currentLeague.leagueKey ?? 0)
+                }else{
+                    self?.viewModel.deleteLeague(leagueID: self?.currentLeagueLocal.key ?? 0)
+                }
                 self?.collectionView.reloadData()
                 self?.dismiss(animated: true)
-                
             }))
             alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return upComingEventList.count
@@ -162,7 +167,8 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
                     .transition(.fade(1)),
                     .cacheOriginalImage
                 ])
-            cell.eventDateLabel.text = upComingEventList[indexPath.row].eventTime
+            cell.eventDateLabel.text = upComingEventList[indexPath.row].eventDay
+            cell.eventTimeLabel.text = upComingEventList[indexPath.row].eventTime
             cell.eventScoreLabel.text = ""
             cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
             cell.contentView.layer.borderWidth = 2
@@ -196,7 +202,8 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
                     .cacheOriginalImage
                 ])
             cell.eventScoreLabel.text = latestResultList[indexPath.row].finalResult
-            cell.eventDateLabel.text=latestResultList[indexPath.row].eventTime
+            cell.eventDateLabel.text=latestResultList[indexPath.row].eventDay
+            cell.eventTimeLabel.text=latestResultList[indexPath.row].eventTime
             cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
             cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = UIColor.black.cgColor
@@ -300,6 +307,10 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             self.present(teamDetails, animated: true)
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        favTableViewController?.reloadTableView()
     }
     /*
      // MARK: - Navigation

@@ -1,15 +1,21 @@
 //
-//  FavTableViewController.swift
+//  FavViewController.swift
 //  SportsApp
 //
-//  Created by Mac on 21/05/2023.
+//  Created by Mac on 30/05/2023.
 //
 
 import UIKit
 import Reachability
 
+protocol ReloadTableViewDelegate: AnyObject {
+    func reloadTableView()
+}
 
-class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
+class FavViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource, ReloadTableViewDelegate{
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var noFavImg: UIImageView!
     var favCoreData = FavCodeData.sharedDB
     var favList : [LeagueLocal] = Array<LeagueLocal>()
     var viewModel : FavViewModel!
@@ -18,6 +24,7 @@ class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
         super.viewDidLoad()
         
         viewModel = FavViewModel(favCoreData: favCoreData)
+        noFavImg.isHidden = true
         
         let  nib = UINib(nibName: "LeaguesCustomView", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
@@ -28,20 +35,24 @@ class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
             [weak self] in
             DispatchQueue.main.async {
                 self?.favList = self?.viewModel.result ?? [LeagueLocal]()
+                if (self?.favList.count == 0){
+                    self?.noFavImg.isHidden = false
+                }else{
+                    self?.noFavImg.isHidden = true
+                }
                 self?.tableView.reloadData()
             }
         }
         viewModel.getItems()
     }
-    
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if favList.count == 0{
             return 0
@@ -54,7 +65,7 @@ class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
         tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesCustomView
         
@@ -83,7 +94,7 @@ class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
 
         return cell
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let reachability = try! Reachability()
         if reachability.connection != .unavailable{
                 let vc = storyboard?.instantiateViewController(withIdentifier: "details") as! DetailsViewController
@@ -101,5 +112,7 @@ class FavTableViewController: UITableViewController , ReloadTableViewDelegate{
         }
        
     }
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }

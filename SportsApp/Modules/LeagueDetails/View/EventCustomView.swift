@@ -13,6 +13,7 @@ class EventCustomView: UICollectionViewCell {
     @IBOutlet weak var teamTwoImg: UIImageView!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventScoreLabel: UILabel!
+    @IBOutlet weak var eventTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

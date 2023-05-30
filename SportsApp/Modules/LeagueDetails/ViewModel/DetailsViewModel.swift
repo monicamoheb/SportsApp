@@ -12,6 +12,12 @@ class DetailsViewModel{
     var sportName : String?
     var leagueID : String!
     var bindResultToViewController : (()->()) = {}
+    var favCoreData : LocalSource?
+    
+    init(favCoreData: LocalSource) {
+        self.favCoreData = favCoreData
+    }
+    
     var result : [Event]!{
         didSet{
             bindResultToViewController()
@@ -62,7 +68,17 @@ class DetailsViewModel{
             }
         }
     }
+    func insertLeague(league : LeagueLocal){
+        favCoreData?.insert(newLeagues: league)
+    }
     
+    func deleteLeague(leagueID : Int){
+        favCoreData?.deleteLeague(key: leagueID)
+    }
     
+    func ifLeagueIsFav(leagueID : Int)-> Bool{
+        guard let result = favCoreData?.getSportFromLocal(id: leagueID) else {return false}
+        return result
+    }
     
 }

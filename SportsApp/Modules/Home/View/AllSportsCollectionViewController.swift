@@ -20,9 +20,10 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        sportsList = [Sports(name: "Football",img: "https://cdn.britannica.com/51/190751-050-147B93F7/soccer-ball-goal.jpg"),
-                      Sports(name: "Basketball",img: ""),
-                      Sports(name: "Cricket",img: "https://st2.depositphotos.com/1454700/6392/i/950/depositphotos_63929367-stock-photo-cricket-stadium-and-ball.jpg")]
+        sportsList = [Sports(name: "Football",img: "football"),
+                      Sports(name: "Basketball",img: "basketball"),
+                      Sports(name: "Cricket",img: "cricket"),
+                      Sports(name: "Tennis",img: "tennis"),]
         //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
@@ -55,9 +56,10 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AllSportsCollectionViewCell
         cell.sportLabel.text = sportsList[indexPath.row].name
     
-        KF.url(URL(string: sportsList[indexPath.row].img!))
-            .placeholder(UIImage(named: "basketball"))
-            .set(to: cell.sportImageView!)
+//        KF.url(URL(string: sportsList[indexPath.row].img!))
+//            .placeholder(UIImage(named: "basketball"))
+//            .set(to: cell.sportImageView!)
+        cell.sportImageView.image = UIImage(named: sportsList[indexPath.row].img ?? "sport")
         cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         cell.contentView.layer.borderWidth = 2
         cell.contentView.layer.borderColor = UIColor.black.cgColor

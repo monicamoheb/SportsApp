@@ -105,6 +105,61 @@
             </objects>
             <point key="canvasLocation" x="2618" y="-535"/>
         </scene>
+        <!--Favoite-->
+        <scene sceneID="EX0-3E-PTb">
+            <objects>
+                <viewController id="DnG-zh-7hw" customClass="FavViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AsF-MG-a3U">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-6a-dYg">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="9iz-H8-Kj8" customClass="LeaguesCustomView" customModule="SportsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9iz-H8-Kj8" id="XQQ-0E-XBe">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DnG-zh-7hw" id="3Yg-gQ-Cpc"/>
+                                    <outlet property="delegate" destination="DnG-zh-7hw" id="81d-MM-QTh"/>
+                                </connections>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFavItems" translatesAutoresizingMaskIntoConstraints="NO" id="aIy-8z-6O3">
+                                <rect key="frame" x="0.0" y="319" width="393" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="2WU-oZ-1UA"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YKL-oZ-5Ft"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aIy-8z-6O3" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Gx1-AK-WIc"/>
+                            <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="aIy-8z-6O3" secondAttribute="bottom" constant="150" id="Kgk-mT-Vfi"/>
+                            <constraint firstItem="aIy-8z-6O3" firstAttribute="trailing" secondItem="YKL-oZ-5Ft" secondAttribute="trailing" id="MVN-Hd-ME7"/>
+                            <constraint firstItem="Nbz-6a-dYg" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Wyp-PN-ZRm"/>
+                            <constraint firstItem="Nbz-6a-dYg" firstAttribute="top" secondItem="YKL-oZ-5Ft" secondAttribute="top" id="XXW-En-Kk3"/>
+                            <constraint firstItem="YKL-oZ-5Ft" firstAttribute="trailing" secondItem="Nbz-6a-dYg" secondAttribute="trailing" id="ttg-ps-yRN"/>
+                            <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="Nbz-6a-dYg" secondAttribute="bottom" id="wrV-pT-cwr"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favoite" image="heart.fill" catalog="system" id="4Bb-3G-Fel"/>
+                    <connections>
+                        <outlet property="noFavImg" destination="aIy-8z-6O3" id="BHd-v7-AAn"/>
+                        <outlet property="tableView" destination="Nbz-6a-dYg" id="9dt-CU-nRn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K9A-Cl-JKs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="733.58778625954199" y="552.11267605633805"/>
+        </scene>
         <!--Favoutites-->
         <scene sceneID="wE7-nX-QJ5">
             <objects>
@@ -132,7 +187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ic8-RK-z2U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1549" y="233"/>
+            <point key="canvasLocation" x="1906" y="244"/>
         </scene>
         <!--Team Details View Controller-->
         <scene sceneID="gIR-xS-6jv">
@@ -383,7 +438,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="fT4-Yj-L9K" kind="relationship" relationship="viewControllers" id="sSN-DX-ccU"/>
-                        <segue destination="LBb-li-zvc" kind="relationship" relationship="viewControllers" id="PsB-qV-DVW"/>
+                        <segue destination="DnG-zh-7hw" kind="relationship" relationship="viewControllers" id="UP9-qc-SYH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oed-mk-d0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -415,6 +470,7 @@
         <image name="figure.disc.sports" catalog="system" width="128" height="108"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="noFavItems" width="260" height="280"/>
         <image name="square.and.arrow.up.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

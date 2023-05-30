@@ -12,7 +12,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="KGk-i7-Jjw" customClass="LeaguesCustomView" customModule="SportsApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -23,7 +23,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjd-VL-gZG">
-                        <rect key="frame" x="80" y="28" width="224" height="21"/>
+                        <rect key="frame" x="88" y="28" width="224" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="224" id="Vpr-7s-TVE"/>
                         </constraints>
@@ -37,6 +37,7 @@
                     <constraint firstItem="A3h-14-2me" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Acq-oh-kg0"/>
                     <constraint firstAttribute="bottom" secondItem="A3h-14-2me" secondAttribute="bottom" id="Agm-RA-EhW"/>
                     <constraint firstItem="A3h-14-2me" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="G9D-20-5mr"/>
+                    <constraint firstItem="Sjd-VL-gZG" firstAttribute="leading" secondItem="A3h-14-2me" secondAttribute="trailing" constant="16" id="SVm-FD-9ds"/>
                     <constraint firstItem="Sjd-VL-gZG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="bmr-Zk-nzS"/>
                     <constraint firstAttribute="trailing" secondItem="Sjd-VL-gZG" secondAttribute="trailing" constant="16" id="p3d-7K-1PU"/>
                 </constraints>
