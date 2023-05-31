@@ -51,8 +51,8 @@ class DetailsViewModel{
         
 //        var param = ["met":"Fixtures", "leagueId":leagueID!,"from":dateStr, "to":afterYearStr,
 //                     "APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
-        var url = "https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=\(leagueID!)&from=\(dateStr)&to=\(afterYearStr)&APIkey=fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"
-        NetworkManager().loadData(url : url) { [weak self] (result : Welcome<Event>?) in
+        var url = "https://apiv2.allsportsapi.com/\(sportName ?? "football")/?met=Fixtures&leagueId=\(leagueID!)&from=\(dateStr)&to=\(afterYearStr)&APIkey=fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"
+        NetworkManager().loadData(url : url) { [weak self] (result : MyResponse<Event>?,error) in
             self?.result = result?.result
             // print(self?.result[0].countryName)
         }
@@ -62,8 +62,8 @@ class DetailsViewModel{
             let yearAgoStr = dateFormatter.string(from: yearAgoDate)
 //            param = ["met":"Fixtures", "leagueId":leagueID!,"from":yearAgoStr, "to":dateStr,
 //                     "APIkey":"fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"]
-            url = "https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=\(leagueID!)&from=\(yearAgoStr)&to=\(dateStr)&APIkey=fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"
-            NetworkManager().loadData(url : url) { [weak self] (result : Welcome<Event>?) in
+            url = "https://apiv2.allsportsapi.com/\(sportName ?? "football")/?met=Fixtures&leagueId=\(leagueID!)&from=\(yearAgoStr)&to=\(dateStr)&APIkey=fb7419108b900032b89d25268411cef54132de43ba4ceec5dd189418a60a6d33"
+            NetworkManager().loadData(url : url) { [weak self] (result : MyResponse<Event>?,error) in
                 self?.latesEvent = result?.result
                 //  print(self?.latesEvent[0].countryName)
             }

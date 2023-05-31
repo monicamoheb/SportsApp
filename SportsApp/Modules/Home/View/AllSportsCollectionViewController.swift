@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Reachability
 
 private let reuseIdentifier = "Cell"
 
@@ -56,9 +57,6 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AllSportsCollectionViewCell
         cell.sportLabel.text = sportsList[indexPath.row].name
     
-//        KF.url(URL(string: sportsList[indexPath.row].img!))
-//            .placeholder(UIImage(named: "basketball"))
-//            .set(to: cell.sportImageView!)
         cell.sportImageView.image = UIImage(named: sportsList[indexPath.row].img ?? "sport")
         cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         cell.contentView.layer.borderWidth = 2
@@ -74,40 +72,20 @@ class AllSportsCollectionViewController: UICollectionViewController, UICollectio
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let leagues = storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
-        leagues.sportName = sportsList[indexPath.row].name?.lowercased()
-        self.navigationController?.pushViewController(leagues, animated: true)
+        
+        
+        let reachability = try! Reachability()
+        if reachability.connection != .unavailable{
+            let leagues = storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
+            leagues.sportName = sportsList[indexPath.row].name?.lowercased()
+            self.navigationController?.pushViewController(leagues, animated: true)
+        }
+        else{
+            let alert : UIAlertController = UIAlertController(title: "ALERT!", message: "No Connection", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
-    
 }

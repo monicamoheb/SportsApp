@@ -15,6 +15,8 @@ class EventCustomView: UICollectionViewCell {
     @IBOutlet weak var eventScoreLabel: UILabel!
     @IBOutlet weak var eventTimeLabel: UILabel!
     
+    @IBOutlet weak var teamTwoNameLabel: UILabel!
+    @IBOutlet weak var teamOneNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

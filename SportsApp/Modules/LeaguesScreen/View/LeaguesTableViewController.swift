@@ -55,7 +55,6 @@ class LeaguesTableViewController: UITableViewController {
         vc.currentLeague = result[indexPath.row]
         vc.sportName = sportName
         self.present(vc, animated: true, completion: nil)
-        //favCoreData.insert(newLeagues: result[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

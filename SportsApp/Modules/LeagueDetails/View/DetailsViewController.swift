@@ -84,7 +84,6 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
         }
         viewModel.getItems()
         
-        
     }
     @IBAction func backBtn(_ sender: Any) {
         self.dismiss(animated: true)
@@ -119,8 +118,10 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
+            print("upcoming \(upComingEventList)")
             return upComingEventList.count
         }else if section == 1{
+            print("latest \(latestResultList)")
             return latestResultList.count
         }
         else{
@@ -134,7 +135,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
                 self.teamsList.append(Team(teamLogo: item.homeTeamLogo, teamName: item.eventHomeTeam, teamKey: item.homeTeamKey))
             }
             teamsList = Array(Set(teamsList))
-            print("\(teamsList.count)")
+            print("teamlist \(teamsList)")
             return teamsList.count
         }
     }
@@ -151,7 +152,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             cell.teamOneImg.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "err.png"),
+                placeholder: UIImage(named: "team1"),
                 options: [
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1)),
@@ -161,7 +162,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             cell.teamTwoImg.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "err.png"),
+                placeholder: UIImage(named: "team2"),
                 options: [
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1)),
@@ -170,6 +171,8 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             cell.eventDateLabel.text = upComingEventList[indexPath.row].eventDay
             cell.eventTimeLabel.text = upComingEventList[indexPath.row].eventTime
             cell.eventScoreLabel.text = ""
+            cell.teamOneNameLabel.text = upComingEventList[indexPath.row].eventHomeTeam
+            cell.teamTwoNameLabel.text = upComingEventList[indexPath.row].eventAwayTeam
             cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
             cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = UIColor.black.cgColor
@@ -185,7 +188,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             cell.teamOneImg.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "err.png"),
+                placeholder: UIImage(named: "team1"),
                 options: [
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1)),
@@ -195,7 +198,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             cell.teamTwoImg.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "err.png"),
+                placeholder: UIImage(named: "team2"),
                 options: [
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1)),
@@ -204,6 +207,8 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             cell.eventScoreLabel.text = latestResultList[indexPath.row].finalResult
             cell.eventDateLabel.text=latestResultList[indexPath.row].eventDay
             cell.eventTimeLabel.text=latestResultList[indexPath.row].eventTime
+            cell.teamOneNameLabel.text = latestResultList[indexPath.row].eventHomeTeam
+            cell.teamTwoNameLabel.text = latestResultList[indexPath.row].eventAwayTeam
             cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
             cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = UIColor.black.cgColor
@@ -219,7 +224,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             cell.teamImg.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "err.png"),
+                placeholder: UIImage(named: "team"),
                 options: [
                     .scaleFactor(UIScreen.main.scale),
                     .transition(.fade(1)),

@@ -33,12 +33,12 @@ class TeamDetailsViewController: UIViewController , UICollectionViewDelegate, UI
             DispatchQueue.main.async {
                 self?.currentTeam = self?.teamViewModel.result ?? Teams()
                 self?.playersArray = self?.currentTeam.players ?? []
-                self?.teamName.text = self?.currentTeam.team_name ?? "aa"
+                self?.teamName.text = self?.currentTeam.team_name ?? "No Name"
                 let url = URL(string: self?.currentTeam.team_logo ?? "")
                 
                 self?.teamImg.kf.setImage(
                     with: url,
-                    placeholder: UIImage(named: "err.png"))
+                    placeholder: UIImage(named: "team"))
                 
                 self?.playersCollectionView.reloadData()
             }
