@@ -8,15 +8,10 @@
 import Foundation
 
 // MARK: - Welcome
-class Welcome<T>: Decodable where T: Decodable{
+class MyResponse<T>: Decodable where T: Decodable{
     var success: Int?
     var result: [T]?
-
-    init(success: Int, result: [T]) {
+    init(success: Int? = nil) {
         self.success = success
-        self.result = result
-    }
-    init(){
-        
     }
 }

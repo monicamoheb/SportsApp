@@ -10,23 +10,25 @@ import Foundation
 import Alamofire
 
 protocol NetworkService{
-    static func loadData<T: Decodable>(sportName: String, param:Parameters ,compilitionHandler: @escaping (T?) -> Void)
+     func loadData<T: Decodable>(url:String,compilitionHandler: @escaping (MyResponse<T>?, Error?) -> Void)
 }
 class NetworkManager : NetworkService{
     
-    static func loadData<T: Decodable>(sportName: String, param:Parameters ,compilitionHandler: @escaping (T?) -> Void){
-        AF.request("https://apiv2.allsportsapi.com/\(sportName)/",parameters: param).responseDecodable(of: T.self){ response in
+     func loadData<T: Decodable>(url:String ,compilitionHandler: @escaping (MyResponse<T>?, Error?) -> Void){
+        AF.request(url).responseDecodable(of: T.self){ response in
             debugPrint(response)
+
             guard response.data != nil else{
+                compilitionHandler(nil , response.error)
                 return
             }
             do{
-                let result = try JSONDecoder().decode(T.self, from: response.data ?? Data())
-                compilitionHandler(result)
-                
+                let result = try JSONDecoder().decode(MyResponse<T>.self, from: response.data ?? Data())
+                compilitionHandler(result,nil)
+
             }catch let error{
                 print(error.localizedDescription)
-                compilitionHandler(nil)
+                compilitionHandler(nil,error)
             }
         }
         

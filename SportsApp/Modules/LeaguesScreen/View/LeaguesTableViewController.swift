@@ -53,8 +53,8 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "details") as! DetailsViewController
         vc.currentLeague = result[indexPath.row]
+        vc.sportName = sportName
         self.present(vc, animated: true, completion: nil)
-        //favCoreData.insert(newLeagues: result[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,7 +66,7 @@ class LeaguesTableViewController: UITableViewController {
         
         cell.leagueImage.kf.setImage(
               with: url,
-              placeholder: UIImage(named: "err.png"),
+              placeholder: UIImage(named: "league.png"),
               options: [
                   .scaleFactor(UIScreen.main.scale),
                   .transition(.fade(1)),
@@ -79,7 +79,7 @@ class LeaguesTableViewController: UITableViewController {
         
         cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = UIColor.black.cgColor
-        cell.contentView.layer.cornerRadius = (cell.leagueImage?.frame.size.width ?? 100)/2
+        cell.contentView.layer.cornerRadius = 25
         
         // Configure the cell...
 

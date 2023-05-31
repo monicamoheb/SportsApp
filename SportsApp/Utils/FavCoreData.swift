@@ -8,8 +8,13 @@
 import Foundation
 import CoreData
 import UIKit
-
-class FavCodeData {
+protocol LocalSource {
+    func insert (newLeagues : LeagueLocal)
+    func fetchAll()-> Array<LeagueLocal>
+    func deleteLeague(key:Int)
+    func getSportFromLocal(id: Int) -> Bool
+}
+class FavCodeData : LocalSource{
     static let sharedDB = FavCodeData()
     
     var manager : NSManagedObjectContext!
@@ -20,17 +25,15 @@ class FavCodeData {
         manager = appDelegate.persistentContainer.viewContext
     }
     
-    func insert (newLeagues : Result){
+    func insert (newLeagues : LeagueLocal){
         //2-
         let entity = NSEntityDescription.entity(forEntityName: "Leagues", in: manager)
         //3-
         let leagues = NSManagedObject(entity: entity!, insertInto: manager)
-        leagues.setValue(newLeagues.leagueKey, forKey: "leagueKey")
-        leagues.setValue(newLeagues.leagueName, forKey: "leagueName")
-        leagues.setValue(newLeagues.leagueLogo, forKey: "leagueLogo")
-        leagues.setValue(newLeagues.countryKey, forKey: "countryKey")
-        leagues.setValue(newLeagues.countryName, forKey: "countryName")
-        leagues.setValue(newLeagues.countryLogo, forKey: "countryLogo")
+        leagues.setValue(newLeagues.key, forKey: "leagueKey")
+        leagues.setValue(newLeagues.name, forKey: "leagueName")
+        leagues.setValue(newLeagues.logo, forKey: "leagueLogo")
+        leagues.setValue(newLeagues.sport, forKey: "sportName")
         
         //4-
         do{
@@ -42,7 +45,7 @@ class FavCodeData {
         
     }
     
-    func fetchAll()-> Array<Result>{
+    func fetchAll()-> Array<LeagueLocal>{
         let fetch = NSFetchRequest<NSManagedObject>(entityName: "Leagues")
         
         do{
@@ -50,28 +53,27 @@ class FavCodeData {
         }catch let error{
             print(error.localizedDescription)
         }
-        var league = Result()
-        var leaguesList = Array<Result>()
+        
+        var leaguesList = Array<LeagueLocal>()
         for item in leagues{
             
-            league.leagueKey = item.value(forKey: "leagueKey") as? Int
-            league.leagueName = item.value(forKey: "leagueName") as? String
-            league.leagueLogo = item.value(forKey: "leagueLogo") as? String
-            league.countryKey = item.value(forKey: "countryKey") as? Int
-            league.countryName = item.value(forKey: "countryName") as? String
-            league.countryLogo = item.value(forKey: "countryLogo") as? String
+            let key = item.value(forKey: "leagueKey") as? Int
+            let name = item.value(forKey: "leagueName") as? String
+            let logo = item.value(forKey: "leagueLogo") as? String
+            let sport = item.value(forKey: "sportName") as? String
+            
+            let league = LeagueLocal(sport: sport!, name: name!, logo: logo!, key: key!)
             
             leaguesList.append(league)
-            league = Result()
         }
         return leaguesList
     }
     
-    func deleteMovie(newLeague:Result){
+    func deleteLeague(key:Int){
         let fetch = NSFetchRequest<NSManagedObject>(entityName: "Leagues")
-        var leagues = self.fetchAll()
+        //var leagues = self.fetchAll()
         
-        let predicate = NSPredicate(format: "leagueKey == \(newLeague.leagueKey ?? 0)")
+        let predicate = NSPredicate(format: "leagueKey == \(key)")
         fetch.predicate = predicate
         
         var fetchObject = [NSManagedObject]()
@@ -88,6 +90,21 @@ class FavCodeData {
         }catch let error{
             print(error.localizedDescription)
         }
+    }
+    
+    func getSportFromLocal(id: Int) -> Bool{
+        
+        let fetchRequest : NSFetchRequest<Leagues> = Leagues.fetchRequest()
+        
+        let myPredicate = NSPredicate.init(format: "leagueKey == \(id)")
+        fetchRequest.predicate = myPredicate
+        
+        if let result = try? manager.fetch(fetchRequest){
+            if result.count > 0{
+                return true
+            }
+        }
+        return false
     }
     
     //    func deleteAll (){
