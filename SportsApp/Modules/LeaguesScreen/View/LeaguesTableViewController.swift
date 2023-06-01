@@ -54,6 +54,7 @@ class LeaguesTableViewController: UITableViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "details") as! DetailsViewController
         vc.currentLeague = result[indexPath.row]
         vc.sportName = sportName
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

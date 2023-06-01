@@ -76,20 +76,4 @@ final class ApiServiceTests: XCTestCase {
         XCTAssertNotNil(responseError)
     }
     
-//    func testLoadDataFromURL() -> Void {
-//        let myExpectation = expectation(description: "wait for API")
-//        sut.loadData(url: "") {(result: Welcome<Teams>?, error)  in
-//            if true{
-//                print("Error \(error?.localizedDescription)")
-//                XCTFail()
-//            }else{
-//                print("Error \(error?.localizedDescription)")
-//                XCTAssert(result?.result?.count ?? 0 > 0)
-//                myExpectation.fulfill()
-//            }
-//        }
-//        waitForExpectations(timeout: 5)
-//    }
-
-    
 }

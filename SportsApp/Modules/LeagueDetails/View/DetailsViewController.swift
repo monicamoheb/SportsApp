@@ -242,7 +242,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
     func drawTheTopSection() -> NSCollectionLayoutSection{
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .absolute(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(350), heightDimension: .absolute(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
         let section = NSCollectionLayoutSection(group: group)
@@ -278,7 +278,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
     func drawTheBottomSection() -> NSCollectionLayoutSection{
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 16)
         let section = NSCollectionLayoutSection(group: group)
@@ -309,7 +309,7 @@ class DetailsViewController: UIViewController , UICollectionViewDelegate, UIColl
             
             teamDetails.sportName = sportName
             teamDetails.teamID = String(teamsList[indexPath.row].teamKey ?? 0)
-            
+            teamDetails.modalPresentationStyle = .fullScreen
             self.present(teamDetails, animated: true)
         }
     }
