@@ -23,6 +23,7 @@ class NetworkManager : NetworkService{
                 return
             }
             do{
+                
                 let result = try JSONDecoder().decode(MyResponse<T>.self, from: response.data ?? Data())
                 compilitionHandler(result,nil)
 

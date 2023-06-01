@@ -102,6 +102,7 @@ class FavViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             vc.isFav = true
             vc.favTableViewController = self
             vc.sportName = favList[indexPath.row].sport
+            vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
         }
         else{
