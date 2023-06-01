@@ -132,7 +132,7 @@
                                 </connections>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFavItems" translatesAutoresizingMaskIntoConstraints="NO" id="aIy-8z-6O3">
-                                <rect key="frame" x="0.0" y="276" width="393" height="300"/>
+                                <rect key="frame" x="0.0" y="319" width="393" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="2WU-oZ-1UA"/>
                                 </constraints>
@@ -142,11 +142,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aIy-8z-6O3" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Gx1-AK-WIc"/>
-                            <constraint firstItem="aIy-8z-6O3" firstAttribute="centerX" secondItem="AsF-MG-a3U" secondAttribute="centerX" id="Kl5-o9-Rws"/>
+                            <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="aIy-8z-6O3" secondAttribute="bottom" constant="150" id="Kgk-mT-Vfi"/>
                             <constraint firstItem="aIy-8z-6O3" firstAttribute="trailing" secondItem="YKL-oZ-5Ft" secondAttribute="trailing" id="MVN-Hd-ME7"/>
                             <constraint firstItem="Nbz-6a-dYg" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Wyp-PN-ZRm"/>
                             <constraint firstItem="Nbz-6a-dYg" firstAttribute="top" secondItem="YKL-oZ-5Ft" secondAttribute="top" id="XXW-En-Kk3"/>
-                            <constraint firstItem="aIy-8z-6O3" firstAttribute="centerY" secondItem="AsF-MG-a3U" secondAttribute="centerY" id="Yv6-5D-D9K"/>
                             <constraint firstItem="YKL-oZ-5Ft" firstAttribute="trailing" secondItem="Nbz-6a-dYg" secondAttribute="trailing" id="ttg-ps-yRN"/>
                             <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="Nbz-6a-dYg" secondAttribute="bottom" id="wrV-pT-cwr"/>
                         </constraints>
@@ -172,7 +171,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4P4-DP-YmE">
                                 <rect key="frame" x="0.0" y="65" width="393" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="9gj-sK-y20"/>
+                                    <constraint firstAttribute="height" constant="48" id="NE4-md-RzY"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem image="chevron.backward" catalog="system" id="1mf-Ow-2kd">
@@ -183,7 +182,7 @@
                                 </items>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMj-xT-aeW">
-                                <rect key="frame" x="16" y="113" width="361" height="299"/>
+                                <rect key="frame" x="16" y="119" width="361" height="293"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name:-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL5-5o-Kac">
                                 <rect key="frame" x="15.999999999999993" y="444" width="125.33333333333331" height="44"/>
@@ -268,6 +267,7 @@
                             <constraint firstItem="xjo-Wo-O4W" firstAttribute="leading" secondItem="gmB-Vk-N4h" secondAttribute="leading" id="8EB-SD-S4W"/>
                             <constraint firstAttribute="bottom" secondItem="xjo-Wo-O4W" secondAttribute="bottom" id="93W-QM-1hF"/>
                             <constraint firstItem="bC9-LM-MoT" firstAttribute="top" secondItem="JL5-5o-Kac" secondAttribute="bottom" constant="32" id="Ill-SA-35X"/>
+                            <constraint firstItem="bMj-xT-aeW" firstAttribute="top" secondItem="gmB-Vk-N4h" secondAttribute="top" constant="60" id="MS7-1N-pbj"/>
                             <constraint firstItem="0FH-Y4-oPd" firstAttribute="top" secondItem="bMj-xT-aeW" secondAttribute="bottom" constant="32" id="Ou1-VY-5b0"/>
                             <constraint firstItem="xjo-Wo-O4W" firstAttribute="trailing" secondItem="gmB-Vk-N4h" secondAttribute="trailing" id="PYp-7Y-zRP"/>
                             <constraint firstAttribute="bottom" secondItem="xjo-Wo-O4W" secondAttribute="bottom" id="Q2d-rN-Bd0"/>
@@ -275,10 +275,8 @@
                             <constraint firstItem="4P4-DP-YmE" firstAttribute="trailing" secondItem="gmB-Vk-N4h" secondAttribute="trailing" id="RZn-o2-Uta"/>
                             <constraint firstItem="JL5-5o-Kac" firstAttribute="top" secondItem="bMj-xT-aeW" secondAttribute="bottom" constant="32" id="TFD-dv-dfJ"/>
                             <constraint firstItem="JL5-5o-Kac" firstAttribute="leading" secondItem="gmB-Vk-N4h" secondAttribute="leading" constant="16" id="US6-ap-mR9"/>
-                            <constraint firstItem="bMj-xT-aeW" firstAttribute="top" secondItem="4P4-DP-YmE" secondAttribute="bottom" id="VUT-Hp-22E"/>
                             <constraint firstItem="4P4-DP-YmE" firstAttribute="top" secondItem="gmB-Vk-N4h" secondAttribute="top" constant="6" id="Yo8-fw-Wsx"/>
                             <constraint firstItem="bC9-LM-MoT" firstAttribute="top" secondItem="0FH-Y4-oPd" secondAttribute="bottom" constant="32" id="Z42-Q5-eOc"/>
-                            <constraint firstItem="bMj-xT-aeW" firstAttribute="top" secondItem="4P4-DP-YmE" secondAttribute="bottom" id="Z6A-MQ-Cjq"/>
                             <constraint firstItem="xjo-Wo-O4W" firstAttribute="top" secondItem="bC9-LM-MoT" secondAttribute="bottom" constant="8" id="baX-Td-5AN"/>
                             <constraint firstItem="4P4-DP-YmE" firstAttribute="leading" secondItem="gmB-Vk-N4h" secondAttribute="leading" id="chc-va-MQz"/>
                             <constraint firstItem="xjo-Wo-O4W" firstAttribute="top" secondItem="bC9-LM-MoT" secondAttribute="bottom" constant="8" id="f8w-w1-jFl"/>
@@ -311,22 +309,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqV-Cz-HEB">
-                                <rect key="frame" x="0.0" y="75" width="393" height="44"/>
-                                <items>
-                                    <barButtonItem image="chevron.backward" catalog="system" id="3gv-fB-fHJ">
-                                        <connections>
-                                            <action selector="backBtn:" destination="IbA-td-bY8" id="yxw-hn-dqT"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Um9-Af-Vwd"/>
-                                    <barButtonItem image="heart" catalog="system" id="wwp-1m-FtW">
-                                        <connections>
-                                            <action selector="favBtn:" destination="IbA-td-bY8" id="1n5-oh-4W6"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wkh-TF-vo7">
                                 <rect key="frame" x="0.0" y="119" width="393" height="699"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -382,6 +364,22 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqV-Cz-HEB">
+                                <rect key="frame" x="0.0" y="75" width="393" height="44"/>
+                                <items>
+                                    <barButtonItem image="chevron.backward" catalog="system" id="3gv-fB-fHJ">
+                                        <connections>
+                                            <action selector="backBtn:" destination="IbA-td-bY8" id="yxw-hn-dqT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Um9-Af-Vwd"/>
+                                    <barButtonItem image="heart" catalog="system" id="wwp-1m-FtW">
+                                        <connections>
+                                            <action selector="favBtn:" destination="IbA-td-bY8" id="1n5-oh-4W6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uXQ-ri-3nc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
