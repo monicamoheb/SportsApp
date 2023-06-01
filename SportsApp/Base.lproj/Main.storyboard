@@ -132,7 +132,7 @@
                                 </connections>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFavItems" translatesAutoresizingMaskIntoConstraints="NO" id="aIy-8z-6O3">
-                                <rect key="frame" x="0.0" y="319" width="393" height="300"/>
+                                <rect key="frame" x="0.0" y="276" width="393" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="2WU-oZ-1UA"/>
                                 </constraints>
@@ -142,10 +142,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aIy-8z-6O3" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Gx1-AK-WIc"/>
-                            <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="aIy-8z-6O3" secondAttribute="bottom" constant="150" id="Kgk-mT-Vfi"/>
                             <constraint firstItem="aIy-8z-6O3" firstAttribute="trailing" secondItem="YKL-oZ-5Ft" secondAttribute="trailing" id="MVN-Hd-ME7"/>
                             <constraint firstItem="Nbz-6a-dYg" firstAttribute="leading" secondItem="YKL-oZ-5Ft" secondAttribute="leading" id="Wyp-PN-ZRm"/>
                             <constraint firstItem="Nbz-6a-dYg" firstAttribute="top" secondItem="YKL-oZ-5Ft" secondAttribute="top" id="XXW-En-Kk3"/>
+                            <constraint firstItem="aIy-8z-6O3" firstAttribute="centerX" secondItem="AsF-MG-a3U" secondAttribute="centerX" id="frR-eS-2fh"/>
+                            <constraint firstItem="aIy-8z-6O3" firstAttribute="centerY" secondItem="AsF-MG-a3U" secondAttribute="centerY" id="iv2-Ha-MGA"/>
                             <constraint firstItem="YKL-oZ-5Ft" firstAttribute="trailing" secondItem="Nbz-6a-dYg" secondAttribute="trailing" id="ttg-ps-yRN"/>
                             <constraint firstItem="YKL-oZ-5Ft" firstAttribute="bottom" secondItem="Nbz-6a-dYg" secondAttribute="bottom" id="wrV-pT-cwr"/>
                         </constraints>
